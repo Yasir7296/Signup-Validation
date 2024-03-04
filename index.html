@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="signupForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    
+        <div id="usernameError" class="error"></div>
+    
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    
+        <div id="passwordError" class="error"></div>
+    
+        <button type="button" onclick="validateForm()">Sign Up</button>
+    </form>
+    
+    <script>
+        function validateForm() {
+            // Reset error messages
+            document.getElementById('usernameError').innerHTML = '';
+            document.getElementById('passwordError').innerHTML = '';
+    
+            // Get form values
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+    
+            // Username validation
+            if (username.trim() === '') {
+                document.getElementById('usernameError').innerHTML = 'Username cannot be empty';
+                return;
+            }
+            if (/\s/.test(username)) {
+                document.getElementById('usernameError').innerHTML = 'Username cannot have spaces';
+                return;
+            }
+            if (/\d/.test(username) || /[!@#$%^&*(),.?":{}|<>]/.test(username)) {
+                document.getElementById('usernameError').innerHTML = 'Username cannot have numbers or special characters';
+                return;
+            }
+    
+            // Password validation
+            if (password.length < 6) {
+                document.getElementById('passwordError').innerHTML = 'Password should be at least six characters long';
+                return;
+            }
+            if (!/[A-Z]/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                document.getElementById('passwordError').innerHTML = 'Password should have at least one uppercase letter and one special character';
+                return;
+            }
+    
+            // If all validations pass, redirect to successful page
+            window.location.href = 'success.html';
+        }
+    </script>
+
+</body>
+</html>
